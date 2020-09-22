@@ -1,0 +1,383 @@
+//------------------------------------------------------------------------------
+//↓↓↓↓表示の都合上ループ表示させています。Cake PHP実装後時に消しちゃってください。↓↓↓↓
+
+//loopFunc('.p-top__news__list__item', '.p-top__news__list', 5);//TOP - news
+//loopFunc('.p-top__paper__list__item', '.p-top__paper__list', 4);//TOP - paper
+//loopFunc('.p-top__movie__list__item', '.p-top__movie__list', 4);//TOP - movie
+//loopFunc('.p-top__prize__list__item', '.p-top__prize__list', 5);//TOP - prize
+//loopFunc('.p-top__ticket__list__item', '.p-top__ticket__list', 5);//TOP - ticket
+//loopFunc('.p-news__list__item', '.p-news__list', 10);//news
+//loopFunc('.u-paper__list--new .p-paper__list__item', '.u-paper__list--new', 4);//paper
+//loopFunc('.u-paper__list--backnumber .p-paper__list__item', '.u-paper__list--backnumber', 6);//paper
+//loopFunc('.u-paper__list--result .p-paper__list__item', '.u-paper__list--result', 10);//paper_result
+//loopFunc('.p-movie__list__item', '.p-movie__list', 48);//movie
+//loopFunc('.u-movieResult__list--result .p-movieResult__list__item', '.u-movieResult__list--result', 12);//movie_list
+//loopFunc('.u-movieResult__list--detail .p-movieResult__list__item', '.u-movieResult__list--detail', 3);//movie_detail
+//loopFunc('.p-prize__list__item', '.p-prize__list', 12);//prize
+//loopFunc('.p-ticket__list__item', '.p-ticket__list', 12);//prize
+
+function loopFunc(item, list, num) {
+  for (var i=0; i<num-1; i++) {
+    var html = $(item).eq(0).clone(true, true);
+    $(list).append(html);
+  }
+}
+//↑↑↑↑表示の都合上ループ表示させています。Cake PHP実装後時に消しちゃってください。↑↑↑↑
+//------------------------------------------------------------------------------
+
+
+
+
+
+//------------------------------------------------------------------------------
+//  初期読み込み
+//------------------------------------------------------------------------------
+objectFitImages('img.u-ofi');// オブジェクトフィット・Edge,IE対応
+objectFitImages('.p-newsDetail__content img');//  オブジェクトフィット・Edge,IE対応
+mySwiper();//  スライド画像
+zipAddress();//  郵便番号から住所を自動入力
+
+$(document)
+  .on('click', '.js-menuOpen', menuOpen)
+  .on('click', '.js-menuClose, .c-overlay', menuClose)
+  .on('click', '.js-sideOpen', sideOpen)
+  .on('click', '.js-sideClose, .c-overlaySide', sideClose)
+  .on('click', '.u-side__list__item--hover', sideMiddleMenu)
+  .on('click', '.js-slideItem', slideMove)
+  .on('click', '.js-snsBtn', snsShare)
+  .on('click', '.js-paperNewBtn', loadPaperNew)
+  .on('click', '.js-paperBacknumberBtn', loadPaperBacknumber)
+  .on('click', '#btn_open', loadModal)
+  .on('change', '#btn_open_check', loadModal)
+  .on('keyup', '#btn_open_read', loadModal)
+;
+
+
+//------------------------------------------------------------------------------
+//  モーダル
+//------------------------------------------------------------------------------
+function loadModal() {
+  $(function(){
+    var modal = $('#modal'),
+          modalContent = $('#modal_content'),
+          btnOpen = $("#btn_open"),
+          btnClose = $(".btn_close");
+
+    modal.show();
+
+    $(modal).on('click', function(event) {
+      if(!($(event.target).closest(modalContent).length)||($(event.target).closest(btnClose).length)){
+        modal.hide();
+      }
+    });
+  });
+}
+
+
+//------------------------------------------------------------------------------
+//  SP - ハンバーガーメニュー OPEN-CLOSE
+//------------------------------------------------------------------------------
+function menuOpen() {
+  $('.js-menuOpen')
+    .addClass('is-active')
+    .addClass('js-menuClose')
+    .removeClass('js-menuOpen');
+  $('body').append($('<div>').addClass('c-overlay'));
+  $('.js-menuList').addClass('is-active');
+}
+function menuClose() {
+  $('.js-menuClose')
+    .addClass('js-menuOpen')
+    .removeClass('js-menuClose')
+    .removeClass('is-active');
+  $('.c-overlay').remove();
+  $('.js-menuList').removeClass('is-active');
+}
+//------------------------------------------------------------------------------
+//  SP - 検索メニュー OPEN-CLOSE
+//------------------------------------------------------------------------------
+function sideOpen() {
+  $('.js-sideOpen')
+    .addClass('is-active')
+    .addClass('js-sideClose')
+    .removeClass('js-sideOpen');
+  $('body').append($('<div>').addClass('c-overlaySide'));
+  $('.js-sideList').addClass('is-active');
+}
+function sideClose() {
+  $('.js-sideClose')
+    .addClass('js-sideOpen')
+    .removeClass('js-sideClose')
+    .removeClass('is-active');
+  $('.c-overlaySide').remove();
+  $('.js-sideList').removeClass('is-active');
+}
+//------------------------------------------------------------------------------
+//  SP - 検索メニュー中カテ
+//------------------------------------------------------------------------------
+function sideMiddleMenu() {
+  if ($(window).width() < 600) {
+    $(this).find('.u-side__list--hoveractive').slideToggle('fast');
+  }
+}
+//------------------------------------------------------------------------------
+//  スライド画像
+//------------------------------------------------------------------------------
+function mySwiper() {
+  var keyvisualSwiper = new Swiper ('.swiper-keyvisual', {
+    loop: true,
+    speed: 600,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    centeredSlides : true,
+    autoplay: 5000,
+    nextButton: '.swiper-keyvisual-next',
+    prevButton: '.swiper-keyvisual-prev',
+    pagination: '.swiper-keyvisual-pagination',
+    paginationClickable: true,
+  });
+
+  var prizeSwiper = new Swiper ('.swiper-prize', {
+    loop: true,
+    speed: 600,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    centeredSlides : true,
+    nextButton: '.swiper-prize-next',
+    prevButton: '.swiper-prize-prev',
+    pagination: '.swiper-prize-pagination',
+    paginationClickable: true,
+  });
+
+  var bookSwiper = new Swiper ('.swiper-book', {
+    // loop: true,
+    speed: 600,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    centeredSlides : true,
+    nextButton: '.swiper-book-next',
+    prevButton: '.swiper-book-prev',
+    pagination: '.swiper-book-pagination',
+    paginationClickable: true,
+    onSlideChangeStart: function() {
+      var max = $('.swiper-book').find('li').length-1;
+      var index = prizeSwiper.activeIndex;
+      if (index == 0) {
+        $('.swiper-book-next').show();
+        $('.swiper-book-prev').hide();
+      } else
+      if (index == max) {
+        $('.swiper-book-next').hide();
+        $('.swiper-book-prev').show();
+      } else {
+        $('.swiper-book-next').show();
+        $('.swiper-book-prev').show();
+      }
+      // console.log(index);
+    }
+  });
+  $('.swiper-book-next').show();
+  $('.swiper-book-prev').hide();
+
+  var book2Swiper = new Swiper ('.swiper-book2', {
+    speed: 600,
+    slidesPerView: 5,
+    slidesPerColumn: 5,
+    slidesPerColumn: 'row',
+    spaceBetween: 16,
+    nextButton: '.swiper-book2-next',
+    prevButton: '.swiper-book2-prev'
+  });
+
+  var newsDetail = new Swiper ('.swiper-newsDetail', {
+    speed: 600,
+    slidesPerView: 4,
+    slidesPerColumn: 4,
+    slidesPerColumn: 'row',
+    spaceBetween: 16,
+    nextButton: '.swiper-newsDetail-next',
+    prevButton: '.swiper-newsDetail-prev'
+  });
+
+}
+//------------------------------------------------------------------------------
+//  スライド画像 - サムネクリック
+//------------------------------------------------------------------------------
+function slideMove() {
+  var num = $(this).index('.js-slideItem');
+  $('.js-hiddenPagenation').find('span').eq(num).click();
+}
+//------------------------------------------------------------------------------
+//  郵便番号から住所を自動入力
+//------------------------------------------------------------------------------
+function zipAddress() {
+  $('#zip').jpostal({
+    click : '#addressLoad',
+    postcode : [
+  	   '#zip'
+  	],
+    address : {
+  		'#address'  : '%3%4%5'
+  	}
+  });
+}
+//------------------------------------------------------------------------------
+// 各SNSシェア
+//------------------------------------------------------------------------------
+function snsShare() {
+  var type = $(this).data('sns-type');
+  var url = encodeURIComponent(location.href);
+  var text = encodeURIComponent($('.js-snsTitle').text());
+  var hashtags = '48times';
+
+  switch (type) {
+    case 'twitter':
+      var target = 'https://twitter.com/share?url='+url+'&text='+text+'&hashtags='+hashtags;
+      windowOpen(target);
+      break;
+    case 'line':
+      var target = 'https://line.me/R/msg/text/?'+text+' '+url;
+      windowOpen(target);
+      break;
+    case 'facebook':
+      var target = 'http://www.facebook.com/share.php?u='+url;
+      windowOpen(target);
+      break;
+  }
+
+  function windowOpen(target) {
+    window.open(target, '_blank', 'width=800,height=400,menubar=no,toolbar=no,scrollbars=yes');
+  }
+
+}
+
+//------------------------------------------------------------------------------
+//  新聞（最新号）読み込み
+//------------------------------------------------------------------------------
+var loadPaperNewNum = 4;//何件読み込むか
+var loadPaperNewCnt = 0;//何回目の読み込みか
+function loadPaperNew() {
+  var json = {
+    url: './js/sample.json',
+    type: 'POST',
+    data : { 'num': loadPaperNewNum, 'cnt': loadPaperNewCnt }
+  }
+  myAjax(json, function(res) { renderPaperNew(res); loadPaperNewCnt++; });
+}
+
+function renderPaperNew(res) {
+  var renderData = [];
+  $.each(res.results, function(i, val) {
+    console.log(val);
+    renderData.push(
+      $('<li>').addClass('p-paper__list__item').append(
+        $('<a>').attr({ 'class': 'c-paperItem u-newsItem-clumn', 'href': val.url }).append(
+          $('<div>').addClass('c-paperItem__txt').append(
+            $('<p>').addClass('c-paperItem__txt__ttl').text(val.ttl),
+            $('<div>').addClass('c-paperItem__txt__info').append(
+              $('<object>').addClass('c-paperItem__txt__info__cat').append(
+                $('<a>').attr({
+                  'style': 'border-color:'+val.cat.color+'; color:'+val.cat.color+';',
+                  'href': './paper_result.html?cat='+val.cat.cat_id
+                }).text(val.cat.name)
+              ),
+              $('<p>').addClass('c-paperItem__txt__info__date').text(val.date)
+            ),
+            $('<p>').addClass('c-paperItem__txt__desc').text(val.desc)
+          ),
+          renderImage(val.img)//画像があるかないか
+        )
+      )
+    );
+  });
+  function renderImage(img) {
+    if(img == "" || img == null || img == undefined) {
+      return false;
+    } else {
+      var html = $('<div>').addClass('c-paperItem__pic').append(
+        $('<img>').attr({ 'class': 'u-ofi', 'src': img })
+      );
+      return html;
+    }
+  }
+  $('.js-paperNewList').append(renderData);
+}
+//------------------------------------------------------------------------------
+//  新聞（バックナンバー）読み込み
+//------------------------------------------------------------------------------
+var loadPaperBacknumberNum = 4;//何件読み込むか
+var loadPaperBacknumberCnt = 0;//何回目の読み込みか
+function loadPaperBacknumber() {
+  var json = {
+    url: './js/sample.json',
+    type: 'POST',
+    data : { 'num': loadPaperBacknumberNum, 'cnt': loadPaperBacknumberCnt }
+  }
+  myAjax(json, function(res) { renderPaperBacknumber(res); loadPaperBacknumberCnt++; });
+}
+
+function renderPaperBacknumber(res) {
+  var renderData = [];
+  $.each(res.results, function(i, val) {
+    console.log(val);
+    renderData.push(
+      $('<li>').addClass('p-paper__list__item').append(
+        $('<a>').attr({ 'class': 'c-paperItem', 'href': val.url }).append(
+          $('<div>').addClass('c-paperItem__txt').append(
+            $('<p>').addClass('c-paperItem__txt__ttl').text(val.ttl),
+            $('<div>').addClass('c-paperItem__txt__info').append(
+              $('<object>').addClass('c-paperItem__txt__info__cat').append(
+                $('<a>').attr({
+                  'style': 'border-color:'+val.cat.color+'; color:'+val.cat.color+';',
+                  'href': './paper_result.html?cat='+val.cat.cat_id
+                }).text(val.cat.name)
+              ),
+              $('<p>').addClass('c-paperItem__txt__info__date').text(val.date)
+            ),
+            $('<p>').addClass('c-paperItem__txt__desc').text(val.desc)
+          ),
+          renderImage(val.img)//画像があるかないか
+        )
+      )
+    );
+  });
+  function renderImage(img) {
+    if(img == "" || img == null || img == undefined) {
+      return false;
+    } else {
+      var html = $('<div>').addClass('c-paperItem__pic').append(
+        $('<img>').attr({ 'class': 'u-ofi', 'src': img })
+      );
+      return html;
+    }
+  }
+  $('.js-paperBacknumberList').append(renderData);
+}
+//------------------------------------------------------------------------------
+//  ajax読み込み
+//------------------------------------------------------------------------------
+function myAjax(json, callback) {
+  $.ajax(json).done(searchSuccess).fail(searchFailed);
+  function searchSuccess(res) {
+    console.log(res);
+    callback(res);
+  }
+  function searchFailed(res) {
+    alert('読み込みに失敗しました。\n通信環境の良い場所で再度お試しください。');
+    console.log(res);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //
