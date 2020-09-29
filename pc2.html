@@ -2,24 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>test</title>
+    <title>비비안갤 방구석 극장</title>
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.915/styles/kendo.default-v2.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.rtl.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.silver.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.mobile.all.min.css"/>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2020.3.915/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 </head>
 <body>
-<div id="splitter">
-  <div><iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=bibian1203&parent=hkt48.ml" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe></div>
-  <div><script async src="//client.uchat.io/uchat.js"></script><u-chat room='nenean' style="display:inline-block; width:100%; height:100%;"></u-chat></div>
-</div>
-<script>
-$("#splitter").kendoSplitter({
-  panes: [ { size: "78%" }, {} ],
-    orientation: "horizontal"
-});
-</script>
+  
 <style>
     html,
     body
@@ -30,11 +24,30 @@ $("#splitter").kendoSplitter({
         overflow:hidden;
     }
 
-    #splitter
+    #horizontal
     {
         height:100%;
-        border-width: 0;
     }
 </style>
+  
+<div id="horizontal">
+    <div>
+            <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=bibian1203&parent=hkt48.ml" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+    </div>
+    <div>
+        <script async src="//client.uchat.io/uchat.js"></script><u-chat room='nenean' style="display:inline-block; width:100%; height:100%;"></u-chat>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#horizontal").kendoSplitter({
+            panes: [
+                { collapsible: false, size: "78%" },
+                { collapsible: false, size: "22%" }
+            ]
+        });
+    });
+</script>
 </body>
 </html>
