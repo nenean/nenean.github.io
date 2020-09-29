@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>비비안갤 방구석 극장</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.rtl.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.silver.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.mobile.all.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+</head>
+<body>
+  
+<style>
+    html,
+    body
+    {
+        height:100%;
+        margin:0;
+        padding:0;
+        overflow:hidden;
+    }
+
+    #vertical
+    {
+        height:100%;
+    }
+</style>
+  
+<div id="vertical">
+    <div>
+        <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=bibian1203&parent=hkt48.ml" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+    </div>
+    <div>
+        <script async src="//client.uchat.io/uchat.js"></script><u-chat room='nenean' style="display:inline-block; width:100%; height:100%;"></u-chat>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#vertical").kendoSplitter({
+          	orientation: "vertical",
+            panes: [
+                { collapsible: false, scrollable: false, size: "45%" },
+                { collapsible: false, scrollable: false }
+            ]
+        });
+    });
+</script>
+</body>
+</html>
