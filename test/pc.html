@@ -1,43 +1,78 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>무라카와비비안</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="default.css" type="text/css">
+    <meta charset="utf-8"/>
+    <title>비비안갤 방구석 극장</title>
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
 
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.rtl.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.silver.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.mobile.all.min.css"/>
 
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 </head>
-<body oncontextmenu='return false' ondragstart='return false' onselectstart='return false' >
-	<div id="container" style="float: left; width:78%; ">
-	<!--
-	<iframe frameborder="0" width="100%" height="100%" src="https://www.facebook.com/video/embed?video_id=483606149212677%2F" scrolling="no" allowfullscreen ></iframe>
-	//-->
-	<iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=bibian1203&parent=nenean.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>	
-	</div>
-	
-		
-	<div id="livechat" style=" float: left; width:22%; height:100%;">
-<!-- 	<iframe src="https://service.dongledongle.com/HKT48" frameborder="0" width="100%" height="100%"></iframe> -->
-	<widgetbot
-	  server="757530194004148284"
-	  channel="757530194004148287"
-	  width="100%"
-	  height="100%"
-	></widgetbot>
-	<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
-	</div>
-	
-	
-	<!--
-	<div id="livechat" style=" float: left; width:22%; height:100%;">
-		<script type="text/javascript" src="http://poooo.ml/chat/script/poochat.js?v1" charset="UTF-8"></script>
-		<script type="text/javascript">
-		var m = new Poo({channel:"mune",nickname:"비비안포에버", opperCode:"EvjPo6h3XegHe%2F7eUk83mvLVhI2%2FaGQnHtPpydB3jsf6vHZjFHoO40gErrwmxLwD",width:"100%", height:"100%",skin:"poopcchat", type:"vertical",viewStatusIcon:false,viewAlert:false,viewUser:false,viewAlertLimit:"",ch_type:"0",info:{photo:"http://poooo.ml/data/apms/photo/sp/spspdks.jpg",md:"eYwYK456Bggxz1336GxJgZ2016zFIGy130",colorcode :"2",userid:"spspdks",binvalue: "1",boycott:"",pageName:"mune",homepage:"http://poooo.ml/mune",chk_room:"0", chk_reg:"ovorjhqxn3clbigvo"}})
-		</script>	
-	</div>
-	//-->
-		
-		</div>
-		
+<body>
+  
+<style>
+    html,
+    body
+    {
+        height:100%;
+        margin:0;
+        padding:0;
+        overflow:hidden;
+    }
+
+    #horizontal
+    {
+        height:100%;
+    }
+    
+    #div1{
+    display: table;
+    width: 100%;
+    height: 100%;
+    }
+  
+    #div2 {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    }
+</style>
+<style>iframe { vertical-align:bottom; } </style>
+<style>iframe { display:block; } </style>
+  
+<div id="horizontal">
+    <!--트위치 삽입 -->
+<!--     <div>
+        <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=bibian1203&parent=hkt48.ml" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="true"></iframe>
+    </div> -->
+    <!--유튜브 삽입 -->
+    <div id="div1">
+      <div id="div2">
+        <iframe width=100% height=100% src="https://www.youtube.com/embed/4tD5C_ZNc-Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>  
+    <div>
+       <iframe src="https://m.dcinside.com/board/hkt48" name="mobile" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#horizontal").kendoSplitter({
+            panes: [
+                { collapsible: false, scrollable: false, size: "78%" },
+                { collapsible: true, scrollable: false }
+            ]
+        });
+    });
+</script>
 </body>
-		
 </html>
