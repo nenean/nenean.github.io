@@ -3,19 +3,15 @@
 <head>
     <meta charset="utf-8"/>
     <title>비비안갤 방구석 극장</title>
-    
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css"/>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.rtl.min.css"/>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.silver.min.css"/>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.mobile.all.min.css"/>
-
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 </head>
 <body>
-  
 <style>
     html,
     body
@@ -25,51 +21,28 @@
         padding:0;
         overflow:hidden;
     }
-
     #horizontal
     {
         height:100%;
     }
-    
-    #div1{
-    display: table;
-    width: 100%;
-    height: 100%;
-    }
-  
-    #div2 {
-    display: table-cell;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    }
 </style>
 <style>iframe { vertical-align:bottom; } </style>
 <style>iframe { display:block; } </style>
-  
 <div id="horizontal">
-    <!--HKT48 Player -->    
+    
+    <!--Player -->
     <div id="player">
-        <iframe width="100%" height="100%" src="https://play.hkt48.ml/player.html" scrolling="no" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="true"></iframe>
-    </div>   
-    <!--트위치 삽입 -->
-<!--     <div id="player">
-        <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=bibian1203&parent=hkt48.ml" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
-    </div> -->
-    <!--유튜브 삽입 -->
-<!--     <div id="div1">
-      <div id="div2">
-        <iframe width=100% height=100% src="https://www.youtube.com/embed/mgTj6X_OLJs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>   -->
-    <div>
-<!--         <iframe width=100% height=100% src="https://48g.bibian.ml/mini/48g.php" frameborder="0"></iframe> -->
-        <script async src="//client.uchat.io/uchat.js"></script><u-chat room='nenean' style="display:inline-block; width:100%; height:100%;"></u-chat>
-<!--         <script async src="//client.uchat.io/uchat.js"></script><u-chat room='nenean' style="display:inline-block; width:100%; height:100%;"></u-chat> -->
+        <iframe src="https://play.hkt48.ml/player.html" name="re-player" width="100%" height="100%" scrolling="no" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="true"></iframe>
     </div>
+    
+    <!--Chat -->
+    <div id="chat">
+        <a href="https://play.hkt48.ml/player.html" target="re-player"><button>일반</button></a>
+        <a href="https://play2.hkt48.ml/player.html" target="re-player"><button>정점</button></a>
+        <script async src="//client.uchat.io/uchat.js"></script><u-chat room='nenean' style="display:inline-block; width:100%; height:100%;"></u-chat>
+    </div>
+    
 </div>
-
 <script>
     $(function() {
         $("#horizontal").kendoSplitter({
@@ -79,6 +52,16 @@
             ]
         });
     });
+</script>
+<script>
+*{
+  margin:auto;
+}
+h1,iframe,div{
+  display :block;
+  text-align :center;
+  margin-top: 30px ;
+}
 </script>
 </body>
 </html>
